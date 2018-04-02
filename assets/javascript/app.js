@@ -35,10 +35,7 @@ $('#add-train').on('click', function () {
     $('#train-destination').val('');
     $('#train-time').val('');
     $('#train-arrival').val('');
-    console.log(newTrain);
-    console.log(destination);
-    console.log(newTime);
-    console.log(arrival);
+   
 });
 
 // creating snapshots from our input form to attach on our table
@@ -71,14 +68,15 @@ database.ref().on('child_added', function (childSnapshot, preChildKey) {
 
     // Next Train
     var arrivalTime = moment().add(minutesAway, "minutes");
+    
     arrivalTime = moment(arrivalTime).format("hh:mm A");
     console.log("ARRIVAL TIME: " + arrivalTime);
     
     // updating our schedule with new trains
 $('#schedule').append("<tr><td>" +
-trainName + "</td><td>" +
+newTrain + "</td><td>" +
 destination + "</td><td>" +
 arrival + "</td><td>" +
-nextArrival + "</td><td>" +
+arrivalTime + "</td><td>" +
 minutesAway + "</td></tr>");
 })
