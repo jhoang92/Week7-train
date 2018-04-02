@@ -1,0 +1,84 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>train destination</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <!--header-->
+    <div class='container'>
+        <div class="jumbotron">
+            <h1 class='text-center'>Welcome to the Train Station!</h1>
+            <h3 class='text-center'>find your next destination!</h3>
+        </div>
+
+        <div class='row'>
+
+            <!--new panel-->
+            <div class='col-lg-12'>
+                <div class='panel panel-default'>
+                    <div class='panel-heading'>
+                        <h3 class='panel-title text-center'>Current Schedule</h3>
+                    </div>
+
+                    <div class='panel body'>
+                    </div>
+                </div>
+            </div>
+            <!--end panel-->
+
+            <!--new panel-->
+            <div class='col-lg-12'>
+                <div class='panel panel-default'>
+                    <div class='panel-heading'>
+                        <h3 class='panel-title text-center'>New train</h3>
+                    </div>
+
+                    <div class='panel-body'>
+                        <form role='form'>
+                            <div class='form-group'>
+                                <label for='train-name'>
+                                    New train:
+                                </label>
+                                <input class='form-control' id='train-input' type='text'>
+                            </div>
+
+                            <div class='form-group'>
+                                <label for='train-destination'>
+                                    New destination:
+                                </label>
+                                <input class='form-control' id='train-destination' type='text'>
+                            </div>
+
+                            <div class='form-group'>
+                                <label for='train-time'>
+                                    Train time:
+                                </label>
+                                <input class='form-control' id='train-time' type='text'>
+                            </div>
+
+                            <div class='form-group'>
+                                <label for='train-arrival'>
+                                    Next Arrival:
+                                </label>
+                                <input class='form-control' id='train-arrival' type='text'>
+                            </div>
+                            <button class='btn btn-default' id="new-Train" type='submit'>Add train</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--end panel-->
+
+        </div>
+
+        <!--end container-->
+    </div>
+</body>
+
+</html>
