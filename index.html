@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>train destination</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
+    <title>Train Schedule</title>
+    <link rel='stylesheet' type='text/css' href='assets/css/reset.css' <link rel='stylesheet' type='text/css' href='assets/css/style.css'
+        <!--bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+    <!--jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--firebase-->
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <!--momentJS-->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </head>
 
 <body>
@@ -27,6 +35,17 @@
                     </div>
 
                     <div class='panel body'>
+                        <table class='table table-hover' id='schedule'>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>destination</th>
+                                    <th>Arrival Frequency</th>
+                                    <th>Next Arrival</th>
+                                    <th>Minutes Away</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -68,7 +87,7 @@
                                 </label>
                                 <input class='form-control' id='train-arrival' type='text'>
                             </div>
-                            <button class='btn btn-default' id="new-Train" type='submit'>Add train</button>
+                            <button class='btn btn-default' id="add-train" type='submit'>Add train</button>
                         </form>
                     </div>
                 </div>
@@ -79,6 +98,9 @@
 
         <!--end container-->
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
 </body>
 
 </html>
