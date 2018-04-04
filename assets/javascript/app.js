@@ -10,24 +10,24 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 
-//   creating variables based on our input field
-var newTrain = $('#train-input').val();
-var destination = $('#train-destination').val();
-var newTime = moment($('#train-time').val().trim(),"Min").format('hh:mm');
-var arrival = $('#train-arrival').val();
-
 
 //   adding onClick to button
 $('#add-train').on('click', function () {
 
     event.preventDefault();
+//   creating variables based on our input field
+var newTrain = $('#train-input').val();
+var destination = $('#train-destination').val();
+var newTime = moment($('#train-time').val().trim(), 'min').format('hh:mm');
+var arrival = $('#train-arrival').val();
+
 
     // attaching our train form to firebase
-    database.ref().set({
-        train: $('#train-input').val().trim(),
-        destination: $('#train-destination').val().trim(),
-        newTime: $('#train-time').val().trim(),
-        arrivalTime: $('#train-arrival').val().trim()
+    database.ref().push({
+        train: newTrain,
+        destination: destination,
+        newTime: newTime,
+        arrivalTime: arrival
     });
 
     // resetting our input fields
@@ -35,48 +35,58 @@ $('#add-train').on('click', function () {
     $('#train-destination').val('');
     $('#train-time').val('');
     $('#train-arrival').val('');
-   
-});
 
+});
+     
 // creating snapshots from our input form to attach on our table
-database.ref().on('child_added', function (childSnapshot, preChildKey) {
-    console.log(childSnapshot.val());
+database.ref().on("child_added", function(childSnapshot) {
+   
     var newTrain = childSnapshot.val().newTrain;
     var destination = childSnapshot.val().destination;
     var newTime = childSnapshot.val().newTime;
     var arrival = childSnapshot.val().arrival;
 
     // using momentJS to calculate our time
-    var orignalTime = moment(newTime, "HH:mm").subtract(1, "years");
-    console.log("First Time " + orignalTime.format("hh:mm"));
+    var originalTime = moment(newTime, "hh:mm").subtract(1, "years");
+    console.log("First Time " + moment(originalTime).format("hh:mm"));
 
     // Current Time
     var currentTime = moment();
     console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
     // ETA between two trains
-    var diffTime = moment().diff(moment(orignalTime), "minutes");
+    var diffTime = moment().diff(moment(currentTime), "minutes");
     console.log("DIFFERENCE IN TIME: " + moment(diffTime).format("hh:mm"));
 
     // remaining time till next train
     var tRemainder = diffTime % arrival;
     console.log("REMAINDER " + tRemainder);
-
+    
     // time till next train
     var minutesAway = arrival - tRemainder;
     console.log("MINUTES TILL TRAIN: " + minutesAway);
 
     // Next Train
     var arrivalTime = moment().add(minutesAway, "minutes");
-    
+
     arrivalTime = moment(arrivalTime).format("hh:mm A");
     console.log("ARRIVAL TIME: " + arrivalTime);
-    
-    // updating our schedule with new trains
-$('#schedule').append("<tr><td>" +
-newTrain + "</td><td>" +
-destination + "</td><td>" +
-arrival + "</td><td>" +
-arrivalTime + "</td><td>" +
-minutesAway + "</td></tr>");
-})
+
+        // updating our schedule with new trains
+    var newTr = $("<tr>");
+
+    // Creating TD displays for the html
+    var nameDisplay = $("<td>").text(childSnapshot.val().train);
+    var destinationDisplay = $("<td>").text(childSnapshot.val().destination);
+    var frequencyDisplay = $("<td>").text(childSnapshot.val().newTime);
+    var arrivalDisplay = $("<td>").text(moment(arrival).format("hh:mm"));
+    var minutesDisplay = $("<td>").text(minutesAway);
+
+    if(minutesAway === NaN) {
+      var minutesDisplay = $("<td>").text("Unavailable");
+    };
+
+    // // Appending the user input to the html
+    newTr.append(nameDisplay, destinationDisplay, frequencyDisplay, arrivalDisplay, minutesDisplay);
+    $("#schedule").append(newTr);
+});
