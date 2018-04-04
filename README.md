@@ -11,6 +11,4 @@ bootstrap - for page styling
 MomentJS - To add our current time and give us updates on our train schedule
 
 # things needed to be done
-fixing the train schedule to show correct info
-<br>
-fixing the form data and have it display on our table
+fix the time it takes to for the next train to come
